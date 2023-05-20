@@ -1,5 +1,19 @@
 <script lang="ts">
+    import type {ActionData, PageData} from "./$types";
+    import { toastStore } from '@skeletonlabs/skeleton';
+    import type { ToastSettings } from '@skeletonlabs/skeleton';
 
+    export let data: PageData;
+    export let form: ActionData;
+
+    if (form?.error) {
+        const t: ToastSettings = {
+            message: `Error occurred: ${form?.error}`,
+            timeout: 5000,
+            background: `variant-filled-error`
+        }
+        toastStore.trigger(t);
+    }
 </script>
 
 <div class="w-screen h-screen flex justify-center items-center">

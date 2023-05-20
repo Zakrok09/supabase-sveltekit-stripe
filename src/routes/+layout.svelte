@@ -5,6 +5,7 @@
 
     import {invalidateAll} from '$app/navigation';
     import { onMount } from 'svelte';
+    import { Toast } from '@skeletonlabs/skeleton';
 
     export let data;
 
@@ -25,4 +26,5 @@
 
 <div class="bg-surface-900 w-screen h-screen">
     <slot />
+    <Toast />
 </div>

@@ -1,11 +1,20 @@
 <script lang="ts">
-    export let error;
+    import type {ActionData, PageData} from "./$types";
+    import { toastStore } from '@skeletonlabs/skeleton';
+    import type { ToastSettings } from '@skeletonlabs/skeleton';
 
-    if (error) {
-        console.log("kur");
+    export let data: PageData;
+    export let form: ActionData;
+
+    if (form?.fail) {
+        const t: ToastSettings = {
+            message: `Error occurred: ${form?.error}`,
+            timeout: 5000,
+            background: `variant-filled-error`
+        }
+        toastStore.trigger(t);
     }
 </script>
-
 <div class="w-screen h-screen flex justify-center items-center">
     <div class="text-white">
         <form action="?/login" method="POST" class="flex flex-col gap-1">
