@@ -3,7 +3,7 @@
     import '@skeletonlabs/skeleton/styles/skeleton.css';
     import '../app.postcss';
 
-    import { invalidate } from '$app/navigation';
+    import {invalidateAll} from '$app/navigation';
     import { onMount } from 'svelte';
 
     export let data;
@@ -12,9 +12,7 @@
 
     onMount(() => {
         const { data } = supabase.auth.onAuthStateChange((event, _session) => {
-            if (_session?.expires_at !== session?.expires_at) {
-                invalidate('supabase:auth');
-            }
+            invalidateAll();
         });
 
         return () => data.subscription.unsubscribe();
@@ -25,6 +23,6 @@
     <title>User Management</title>
 </svelte:head>
 
-<div class="container" style="padding: 50px 0 100px 0">
+<div class="bg-surface-900 w-screen h-screen">
     <slot />
 </div>
