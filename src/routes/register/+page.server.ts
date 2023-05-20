@@ -1,12 +1,22 @@
 import type { Actions } from "@sveltejs/kit";
 import {fail, redirect} from "@sveltejs/kit";
 import  {AuthApiError} from "@supabase/supabase-js";
+import type { PageServerLoad } from './$types';
+
+export const load:PageServerLoad = async ({locals: {getSession} }) => {
+    const session = await getSession();
+
+    if(session) {
+        throw redirect(303, '/');
+    }
+}
 
 export const actions: Actions ={
-    register: async ({request, locals}) => {
+    register: async ({request, locals: {supabase}}) => {
+
         const body = Object.fromEntries(await request.formData());
 
-        const {data, error: err} = await locals.supabase.auth.signUp({
+        const {data, error: err} = await supabase.auth.signUp({
             email: body.email as string,
             password: body.password as string,
             options: {

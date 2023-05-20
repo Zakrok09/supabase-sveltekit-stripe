@@ -1,5 +1,9 @@
 <script lang="ts">
+    export let error;
 
+    if (error) {
+        console.log("kur");
+    }
 </script>
 
 <div class="w-screen h-screen flex justify-center items-center">
