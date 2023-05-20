@@ -6,6 +6,7 @@
     import {invalidateAll} from '$app/navigation';
     import { onMount } from 'svelte';
     import { Toast } from '@skeletonlabs/skeleton';
+    import Header from "$lib/Header.svelte";
 
     export let data;
 
@@ -25,6 +26,7 @@
 </svelte:head>
 
 <div class="bg-surface-900 w-screen h-screen">
+    <Header {data} />
     <slot />
     <Toast />
 </div>
